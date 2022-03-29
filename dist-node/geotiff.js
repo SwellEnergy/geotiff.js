@@ -49,6 +49,9 @@ Object.defineProperty(exports, "setLogger", { enumerable: true, get: function ()
  * @typedef {Uint8Array | Int8Array | Uint16Array | Int16Array | Uint32Array | Int32Array | Float32Array | Float64Array}
  * TypedArray
  */
+/**
+ * @typedef { (TypedArray | TypedArray[]) & { height: number; width: number } } ReadRasterResult
+ */
 function getFieldTypeLength(fieldType) {
     switch (fieldType) {
         case globals_js_1.fieldTypes.BYTE:
@@ -219,7 +222,7 @@ class GeoTIFFBase {
      * image is called and the result returned.
      * @see GeoTIFFImage.readRasters
      * @param {import('./geotiffimage').ReadRasterOptions} [options={}] optional parameters
-     * @returns {Promise<(TypedArray|TypedArray[])>} the decoded arrays as a promise
+     * @returns {Promise<ReadRasterResult>} the decoded arrays as a promise
      */
     async readRasters(options = {}) {
         const { window: imageWindow, width, height } = options;

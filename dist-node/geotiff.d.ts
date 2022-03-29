@@ -61,6 +61,10 @@ export function fromUrls(mainUrl: string, overviewUrls?: string[], options?: any
 export function writeArrayBuffer(values: any, metadata: any): any;
 export default GeoTIFF;
 export type TypedArray = Uint8Array | Int8Array | Uint16Array | Int16Array | Uint32Array | Int32Array | Float32Array | Float64Array;
+export type ReadRasterResult = (TypedArray | TypedArray[]) & {
+    height: number;
+    width: number;
+};
 export type GeoTIFFOptions = {
     /**
      * whether or not decoded tiles shall be cached.
@@ -190,9 +194,9 @@ declare class GeoTIFFBase {
      * image is called and the result returned.
      * @see GeoTIFFImage.readRasters
      * @param {import('./geotiffimage').ReadRasterOptions} [options={}] optional parameters
-     * @returns {Promise<(TypedArray|TypedArray[])>} the decoded arrays as a promise
+     * @returns {Promise<ReadRasterResult>} the decoded arrays as a promise
      */
-    readRasters(options?: import("./geotiffimage.js").ReadRasterOptions | undefined): Promise<(TypedArray | TypedArray[])>;
+    readRasters(options?: import("./geotiffimage.js").ReadRasterOptions | undefined): Promise<ReadRasterResult>;
 }
 import DataSlice from "./dataslice.js";
 /**

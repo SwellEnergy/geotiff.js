@@ -51,6 +51,7 @@ export type ReadRasterOptions = {
     fillValue?: number | number[] | undefined;
 };
 export type TypedArray = import("./geotiff.js").TypedArray;
+export type ReadRasterResult = import("./geotiff.js").ReadRasterResult;
 /**
  * GeoTIFF sub-file image.
  */
@@ -137,7 +138,7 @@ declare class GeoTIFFImage {
      * @private
      * @param {Array} imageWindow The image window in pixel coordinates
      * @param {Array} samples The selected samples (0-based indices)
-     * @param {TypedArray[]|TypedArray} valueArrays The array(s) to write into
+     * @param {TypedArray|TypedArray[]} valueArrays The array(s) to write into
      * @param {Boolean} interleave Whether or not to write in an interleaved manner
      * @param {import("./geotiff").Pool|AbstractDecoder} poolOrDecoder the decoder or decoder pool
      * @param {number} width the width of window to be read into
@@ -145,7 +146,7 @@ declare class GeoTIFFImage {
      * @param {number} resampleMethod the resampling method to be used when interpolating
      * @param {AbortSignal} [signal] An AbortSignal that may be signalled if the request is
      *                               to be aborted
-     * @returns {Promise<TypedArray[]>|Promise<TypedArray>}
+     * @returns {Promise<ReadRasterResult>}
      */
     private _readRaster;
     /**
@@ -155,9 +156,9 @@ declare class GeoTIFFImage {
      * of the raster is read for each sample.
      *
      * @param {ReadRasterOptions} [options={}] optional parameters
-     * @returns {Promise.<(TypedArray|TypedArray[])>} the decoded arrays as a promise
+     * @returns {Promise<ReadRasterResult>} the decoded arrays as a promise
      */
-    readRasters({ window: wnd, samples, interleave, pool, width, height, resampleMethod, fillValue, signal, }?: ReadRasterOptions | undefined): Promise<(TypedArray | TypedArray[])>;
+    readRasters({ window: wnd, samples, interleave, pool, width, height, resampleMethod, fillValue, signal, }?: ReadRasterOptions | undefined): Promise<ReadRasterResult>;
     /**
      * Reads raster data from the image as RGB. The result is always an
      * interleaved typed array.
@@ -180,7 +181,7 @@ declare class GeoTIFFImage {
      * @param {boolean} [options.enableAlpha=false] Enable reading alpha channel if present.
      * @param {AbortSignal} [options.signal] An AbortSignal that may be signalled if the request is
      *                                       to be aborted
-     * @returns {Promise<TypedArray|TypedArray[]>} the RGB array as a Promise
+     * @returns {Promise<ReadRasterResult>} the RGB array as a Promise
      */
     readRGB({ window, interleave, pool, width, height, resampleMethod, enableAlpha, signal }?: {
         window?: number[] | undefined;
@@ -191,7 +192,7 @@ declare class GeoTIFFImage {
         resampleMethod?: string | undefined;
         enableAlpha?: boolean | undefined;
         signal?: AbortSignal | undefined;
-    } | undefined): Promise<TypedArray | TypedArray[]>;
+    } | undefined): Promise<ReadRasterResult>;
     /**
      * Returns an array of tiepoints.
      * @returns {Object[]}

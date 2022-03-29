@@ -14,6 +14,8 @@ For now, the `master` branch of this repository is installed as an npm dependenc
 
 **2022-04-14** Add `husky` and git `pre-commit` hook to ensure we commit the build files to the repository.
 
+**2022-04-14** Fix `readRasters()` TypeScript return type.
+
 # geotiff.js
 [![Node.js CI](https://github.com/geotiffjs/geotiff.js/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/geotiffjs/geotiff.js/actions/workflows/ci.yml) [![npm version](https://badge.fury.io/js/geotiff.svg)](https://badge.fury.io/js/geotiff) [![Gitter chat](https://badges.gitter.im/geotiffjs/geotiff.js.png)](https://gitter.im/geotiffjs/Lobby)
 
