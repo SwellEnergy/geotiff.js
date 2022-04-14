@@ -55,6 +55,7 @@
     "express": "^4.17.1",
     "finalhandler": "^1.1.2",
     "fs-extra": "^7.0.1",
+    "husky": "^7.0.4",
     "isomorphic-fetch": "^2.2.1",
     "jsdoc": "^3.6.4",
     "jsdoc-plugin-typescript": "^2.0.6",
@@ -88,7 +89,7 @@
     "prelint": "npm run build:module",
     "lint": "eslint src test scripts/*.cjs .eslintrc.cjs",
     "lint:fix": "npm run lint -- --fix",
-    "prepare": "npm run build",
+    "prepare": "npm run build && husky install",
     "pretest": "npm run lint",
     "test": "mocha --full-trace test/geotiff.spec.js"
   },
