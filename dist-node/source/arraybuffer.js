@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.makeBufferSource = void 0;
+exports.makeArrayBufferSource = exports.ArrayBufferSource = void 0;
 const basesource_js_1 = require("./basesource.js");
 const utils_js_1 = require("../utils.js");
 class ArrayBufferSource extends basesource_js_1.BaseSource {
@@ -15,8 +15,9 @@ class ArrayBufferSource extends basesource_js_1.BaseSource {
         return this.arrayBuffer.slice(slice.offset, slice.offset + slice.length);
     }
 }
-function makeBufferSource(arrayBuffer) {
+exports.ArrayBufferSource = ArrayBufferSource;
+function makeArrayBufferSource(arrayBuffer) {
     return new ArrayBufferSource(arrayBuffer);
 }
-exports.makeBufferSource = makeBufferSource;
+exports.makeArrayBufferSource = makeArrayBufferSource;
 //# sourceMappingURL=arraybuffer.js.map

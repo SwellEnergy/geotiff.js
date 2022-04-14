@@ -16,6 +16,8 @@ For now, the `master` branch of this repository is installed as an npm dependenc
 
 **2022-04-14** Fix `readRasters()` TypeScript return type.
 
+**2022-04-14** Add `fromBuffer()` so we can use Node.js Buffers directly.
+
 # geotiff.js
 [![Node.js CI](https://github.com/geotiffjs/geotiff.js/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/geotiffjs/geotiff.js/actions/workflows/ci.yml) [![npm version](https://badge.fury.io/js/geotiff.svg)](https://badge.fury.io/js/geotiff) [![Gitter chat](https://badges.gitter.im/geotiffjs/geotiff.js.png)](https://gitter.im/geotiffjs/Lobby)
 
@@ -29,6 +31,7 @@ Currently available functionality:
   * Parsing TIFFs from various sources:
     * remote (via `fetch` or XHR)
     * from a local `ArrayBuffer`
+    * from a Node.js `Buffer`
     * from the filesystem (on Browsers using the `FileReader` and on node using the filesystem functions)
   * Parsing the headers of all possible TIFF files
   * Rudimentary extraction of geospatial metadata
@@ -149,10 +152,10 @@ geotiff.js works with both `require`, `import` and the global variable `GeoTIFF`
 
 ```javascript
 const GeoTIFF = require('geotiff');
-const { fromUrl, fromUrls, fromArrayBuffer, fromBlob } = GeoTIFF;
+const { fromUrl, fromUrls, fromArrayBuffer, fromBuffer, fromBlob } = GeoTIFF;
 
 // or
-import GeoTIFF, { fromUrl, fromUrls, fromArrayBuffer, fromBlob } from 'geotiff';
+import GeoTIFF, { fromUrl, fromUrls, fromArrayBuffer, fromBuffer, fromBlob } from 'geotiff';
 ```
 
 or:
@@ -192,6 +195,19 @@ options are reading from a local `ArrayBuffer`:
 const response = await fetch(someUrl);
 const arrayBuffer = await response.arrayBuffer();
 const tiff = await fromArrayBuffer(arrayBuffer);
+```
+
+or a Node.js `Buffer`:
+
+```javascript
+// for instance, from a ReadableStream
+const stream = fetchResourceAsStream(someLocation)
+const buffer = await new Promise(resolve => {
+  const chunks = [];
+  stream.on('data', chunk => chunks.push(chunk));
+  stream.on('end', () => resolve(Buffer.concat(chunks)));
+});
+const tiff = await fromBuffer(buffer);
 ```
 
 or a `Blob`/`File`:
