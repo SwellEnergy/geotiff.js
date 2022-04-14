@@ -1,3 +1,15 @@
+# Important Notice for Swell Energy!
+
+This repo was forked on 2022-04-13 because v2.0.5 in the upstream breaks our application.
+See [here](https://github.com/geotiffjs/geotiff.js/issues/301).
+
+Once our application can use pure ESM packages, we can go back to using the mainline.
+See [here](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+
+For now, the `master` branch of this repository is installed as an npm dependency of our application.
+
+-Michael Buhler, 2022-04-14
+
 # geotiff.js
 [![Node.js CI](https://github.com/geotiffjs/geotiff.js/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/geotiffjs/geotiff.js/actions/workflows/ci.yml) [![npm version](https://badge.fury.io/js/geotiff.svg)](https://badge.fury.io/js/geotiff) [![Gitter chat](https://badges.gitter.im/geotiffjs/geotiff.js.png)](https://gitter.im/geotiffjs/Lobby)
 
